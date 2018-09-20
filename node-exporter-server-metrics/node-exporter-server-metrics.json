@@ -834,7 +834,7 @@
           },
           "yaxes": [
             {
-              "format": "short",
+              "format": "iops",
               "label": "IO/second read (-) / write (+)",
               "logBase": 1,
               "max": null,
@@ -934,7 +934,7 @@
           },
           "yaxes": [
             {
-              "format": "bytes",
+              "format": "Bps",
               "label": "Bytes/second read (-) / write (+)",
               "logBase": 1,
               "max": null,
@@ -1292,8 +1292,8 @@
           },
           "yaxes": [
             {
-              "format": "bits",
-              "label": "bits in (-) / bits out (+)",
+              "format": "bps",
+              "label": "bits/s in (-) / out (+)",
               "logBase": 1,
               "max": null,
               "min": null,
@@ -1493,7 +1493,7 @@
           },
           "yaxes": [
             {
-              "format": "short",
+              "format": "pps",
               "logBase": 1,
               "max": null,
               "min": null,

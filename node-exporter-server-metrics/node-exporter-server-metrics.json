@@ -1366,7 +1366,7 @@
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Netstat",
+          "title": "TCP Connections",
           "tooltip": {
             "msResolution": false,
             "shared": true,
@@ -1481,7 +1481,7 @@
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "UDP Stats",
+          "title": "UDP Packet Rate",
           "tooltip": {
             "msResolution": false,
             "shared": true,

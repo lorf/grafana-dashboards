@@ -28,10 +28,6 @@
   dashboard to use standalone. Requirements:
    * Grafana 5.0.0
    * Prometheus
-   * Metrics from node-exporter. It either should be installed on server or
-     deployed to the cluster as a DaemonSet, e.g. using
-     [this](https://github.com/helm/charts/tree/master/stable/prometheus-node-exporter)
-     helm chart.
    * Metrics from
      [kube-state-metrics](https://github.com/kubernetes/kube-state-metrics).
      It should be

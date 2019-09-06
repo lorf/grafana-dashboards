@@ -50,7 +50,7 @@ map {
         $_->{query} = "label_values(kube_pod_info, namespace)";
     }
     if ($_->{name} and $_->{name} eq "node") {
-        $_->{query} = "label_values(node_load1, instance)";
+        $_->{query} = "label_values(kube_node_info, node)";
     }
     if ($_->{name} and $_->{name} eq "pod") {
         $_->{query} = "label_values(kube_pod_info{namespace=\"\$namespace\"}, pod)";

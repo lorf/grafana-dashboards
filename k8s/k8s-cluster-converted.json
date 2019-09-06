@@ -2525,7 +2525,7 @@
             "multi" : true,
             "name" : "node",
             "options" : [],
-            "query" : "label_values(node_load1, instance)",
+            "query" : "label_values(kube_node_info, node)",
             "refresh" : 1,
             "regex" : "",
             "sort" : 0,

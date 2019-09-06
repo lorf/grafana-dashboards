@@ -29,13 +29,30 @@ $obj->{"__inputs"} = [
 @{$obj->{panels}} = grep {
     not ($_->{type} and $_->{type} eq 'prometheus-kubernetes-podnav-panel')
         and not ($_->{title} and $_->{title} eq 'Pod Filtering');
-} @{$obj->{panels} || []};
+} @{$obj->{panels}}
+    if $obj->{panels};
 
 map {
     if ($_->{datasource} and $_->{datasource} eq '$datasource') {
         $_->{datasource} = '${DS_PROMETHEUS}';
     }
-} @{$obj->{panels} || []};
+    map {
+        if ($_->{expr} and $_->{expr} =~ /\bnode_/)
+        {
+            # Patch query to add nodename label to node-exporter metrics.
+            # See https://stackoverflow.com/a/50357418
+            $_->{expr} =~ s/\b(node_\w+)\s*({.*?\bnodename\b.*?})?/($1 * on(instance) group_left(nodename) (node_uname_info$2))/g;
+        }
+
+        if ($_->{expr} and $_->{expr} =~ /\bnode_filesystem_/)
+        {
+            # Patch queries to support later versions of node-exporter
+            $_->{expr} =~ s/\b(node_filesystem_\w+)(\s*{[^}]*})?/($1@{[$2||""]} or ${1}_bytes@{[$2||""]})/g;
+        }
+    } @{$_->{targets}}
+        if $_->{targets};
+} @{$obj->{panels}}
+    if $obj->{panels};
 
 # Dashboard variables
 
@@ -43,7 +60,8 @@ map {
     my $v = $_;
     not $v->{name}
         or not grep { $v->{name} eq $_ } qw(ds datasource cluster);
-} @{$obj->{templating}{list} || []};
+} @{$obj->{templating}{list}}
+    if $obj->{templating}{list};
 
 map {
     if ($_->{name} and $_->{name} eq "namespace") {
@@ -61,12 +79,14 @@ map {
     if ($_->{datasource} and $_->{datasource} eq '$cluster') {
         $_->{datasource} = '${DS_PROMETHEUS}';
     }
-} @{$obj->{templating}{list} || []};
+} @{$obj->{templating}{list}}
+    if $obj->{templating}{list};
 
 # Dashboard requirements
 
 @{$obj->{__requires}} = grep { $_->{id} ne "prometheus-kubernetes-podnav-panel" }
-    @{$obj->{__requires} || []};
+    @{$obj->{__requires}}
+        if $obj->{__requires};
 
 # Dashboard links
 
@@ -76,7 +96,8 @@ map {
         $_->{keepTime} = JSON::true;
         $_->{tags} = ["k8s"];
     }
-} @{$obj->{links} || []};
+} @{$obj->{links}}
+    if $obj->{links};
 
 # Dashboard tags
 

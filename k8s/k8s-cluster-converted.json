@@ -363,7 +363,7 @@
          "tableColumn" : "",
          "targets" : [
             {
-               "expr" : "(sum (node_filesystem_size{nodename=~\"$node\"}) - sum (node_filesystem_free{nodename=~\"$node\"})) / sum (node_filesystem_size{nodename=~\"$node\"})",
+               "expr" : "(sum (((node_filesystem_size or node_filesystem_size_bytes) * on(instance) group_left(nodename) (node_uname_info{nodename=~\"$node\"}))) - sum (((node_filesystem_free or node_filesystem_free_bytes) * on(instance) group_left(nodename) (node_uname_info{nodename=~\"$node\"})))) / sum (((node_filesystem_size or node_filesystem_size_bytes) * on(instance) group_left(nodename) (node_uname_info{nodename=~\"$node\"})))",
                "format" : "time_series",
                "intervalFactor" : 1,
                "refId" : "A"
@@ -702,14 +702,14 @@
          "steppedLine" : false,
          "targets" : [
             {
-               "expr" : "sum(node_filesystem_size{nodename=~\"$node\"}) - sum(node_filesystem_free{nodename=~\"$node\"})",
+               "expr" : "sum(((node_filesystem_size or node_filesystem_size_bytes) * on(instance) group_left(nodename) (node_uname_info{nodename=~\"$node\"}))) - sum(((node_filesystem_free or node_filesystem_free_bytes) * on(instance) group_left(nodename) (node_uname_info{nodename=~\"$node\"})))",
                "format" : "time_series",
                "intervalFactor" : 1,
                "legendFormat" : "usage",
                "refId" : "A"
             },
             {
-               "expr" : "sum(node_filesystem_size{nodename=~\"$node\"})",
+               "expr" : "sum(((node_filesystem_size or node_filesystem_size_bytes) * on(instance) group_left(nodename) (node_uname_info{nodename=~\"$node\"})))",
                "format" : "time_series",
                "intervalFactor" : 1,
                "legendFormat" : "limit",

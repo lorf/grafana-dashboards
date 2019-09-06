@@ -13,15 +13,12 @@
   dashboard to use standalone. Requirements:
    * Grafana 5.0.0
    * Prometheus
-   * Metrics from node-exporter. It either should be installed on server or
+   * Metrics from node-exporter. It either should be installed on nodes or
      deployed to the cluster as a DaemonSet, e.g. using
      [this](https://github.com/helm/charts/tree/master/stable/prometheus-node-exporter)
      helm chart.
    * Metrics from
-     [kube-state-metrics](https://github.com/kubernetes/kube-state-metrics).
-     It should be
-     [deployed](https://github.com/kubernetes/kube-state-metrics#kubernetes-deployment)
-     to cluster.
+     [kube-state-metrics](https://github.com/kubernetes/kube-state-metrics#kubernetes-deployment).
 * [k8s-deployments-converted.json](k8s-deployments-converted.json) - Kubernetes
   deployments overview. Converted from
   [kubernetes-app](https://github.com/grafana/kubernetes-app) K8s Deployments
@@ -29,7 +26,4 @@
    * Grafana 5.0.0
    * Prometheus
    * Metrics from
-     [kube-state-metrics](https://github.com/kubernetes/kube-state-metrics).
-     It should be
-     [deployed](https://github.com/kubernetes/kube-state-metrics#kubernetes-deployment)
-     to cluster.
+     [kube-state-metrics](https://github.com/kubernetes/kube-state-metrics#kubernetes-deployment).

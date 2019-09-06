@@ -1,3 +1,4 @@
-Grafana dashboards.
+# Grafana dashboards.
 
-node-exporter-system-metrics, see: https://grafana.net/dashboards/405
+* [node-exporter-server-metrics](node-exporter-server-metrics/) - Server system dashboard
+   * See [node-exporter-server-metrics/README.md](node-exporter-server-metrics/README.md)

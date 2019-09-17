@@ -52,7 +52,7 @@
   "gnetId": null,
   "graphTooltip": 1,
   "id": null,
-  "iteration": 1568702279210,
+  "iteration": 1568706584534,
   "links": [
     {
       "asDropdown": true,
@@ -131,7 +131,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum(count(moleculer_service_endpoints_total{service=~\"$service\"}) by (service) or count(moleculer_req_duration_ms_sum{service=~\"$service\"}) by (service))",
+          "expr": "count(count(moleculer_service_endpoints_total{service=~\"$service\"}) by (service) or count(moleculer_req_duration_ms_sum{service=~\"$service\"}) by (service))",
           "format": "time_series",
           "intervalFactor": 2,
           "refId": "A",
@@ -215,7 +215,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum(count(moleculer_action_endpoints_total{action=~\"$service\\\\..*\", action=~\"$action\"}) by (action) or count(moleculer_req_duration_ms_sum{action=~\"$service\\\\..*\", action=~\"$action\"}) by (action))",
+          "expr": "count(count(moleculer_action_endpoints_total{action=~\"$service\\\\..*\", action=~\"$action\"}) by (action) or count(moleculer_req_duration_ms_sum{action=~\"$service\\\\..*\", action=~\"$action\"}) by (action))",
           "format": "time_series",
           "intervalFactor": 2,
           "refId": "A",
@@ -870,5 +870,5 @@
   "timezone": "",
   "title": "Moleculer Actions",
   "uid": "S74TTktZz",
-  "version": 6
+  "version": 7
 }

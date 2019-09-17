@@ -214,7 +214,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "moleculer_services_total",
+          "expr": "count(count(moleculer_service_endpoints_total) by (service) or count(moleculer_req_duration_ms_sum) by (service))",
           "format": "time_series",
           "intervalFactor": 2,
           "refId": "A",
@@ -298,7 +298,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "moleculer_actions_total",
+          "expr": "count(count(moleculer_action_endpoints_total) by (action) or count(moleculer_req_duration_ms_sum) by (action))",
           "format": "time_series",
           "intervalFactor": 2,
           "refId": "A",
@@ -467,7 +467,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum(moleculer_req_total)",
+          "expr": "sum(moleculer_req_duration_ms_count)",
           "format": "time_series",
           "hide": false,
           "intervalFactor": 2,
@@ -720,7 +720,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum(irate(moleculer_req_total[1m]))",
+          "expr": "sum(irate(moleculer_req_duration_ms_count[1m]))",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
@@ -919,7 +919,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(irate(moleculer_req_total[1m]))",
+          "expr": "sum(irate(moleculer_req_duration_ms_count[1m]))",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "Calls",
@@ -1017,7 +1017,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum by (errorName) (irate(moleculer_req_errors_total[1m]))",
+          "expr": "sum(irate(moleculer_req_errors_total[1m])) by (errorName)",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{errorName}}",
@@ -1219,5 +1219,5 @@
   "timezone": "",
   "title": "Moleculer Summary",
   "uid": "Gzl0okpWk",
-  "version": 1
+  "version": 2
 }

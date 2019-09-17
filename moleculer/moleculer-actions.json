@@ -52,7 +52,7 @@
   "gnetId": null,
   "graphTooltip": 1,
   "id": null,
-  "iteration": 1568691272111,
+  "iteration": 1568700876706,
   "links": [
     {
       "asDropdown": true,
@@ -131,7 +131,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "count(moleculer_service_endpoints_total{service=~\"$service\"})",
+          "expr": "sum(count(moleculer_service_endpoints_total{service=~\"$service\"}) by (service) or count(moleculer_req_duration_ms_sum{service=~\"$service\"}) by (service))",
           "format": "time_series",
           "intervalFactor": 2,
           "refId": "A",
@@ -215,7 +215,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "count(moleculer_action_endpoints_total{action=~\"$service\\\\..*\", action=~\"$action\"})",
+          "expr": "sum(count(moleculer_action_endpoints_total{action=~\"$service\\\\..*\", action=~\"$action\"}) by (action) or count(moleculer_req_duration_ms_sum{action=~\"$service\\\\..*\", action=~\"$action\"}) by (action))",
           "format": "time_series",
           "intervalFactor": 2,
           "refId": "A",
@@ -299,7 +299,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum(irate(moleculer_req_total{service=~\"$service\", action=~\"$action\"}[1m]))",
+          "expr": "sum(irate(moleculer_req_duration_ms_count{service=~\"$service\", action=~\"$action\"}[1m]))",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 2,
@@ -499,23 +499,24 @@
       "fillGradient": 0,
       "gridPos": {
         "h": 8,
-        "w": 12,
+        "w": 24,
         "x": 0,
         "y": 3
       },
       "id": 14,
       "legend": {
-        "alignAsTable": false,
-        "avg": false,
-        "current": false,
-        "hideEmpty": false,
-        "hideZero": false,
-        "max": false,
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "hideEmpty": true,
+        "hideZero": true,
+        "max": true,
         "min": false,
-        "rightSide": false,
+        "rightSide": true,
         "show": true,
+        "sideWidth": 420,
         "total": false,
-        "values": false
+        "values": true
       },
       "lines": true,
       "linewidth": 1,
@@ -594,19 +595,24 @@
       "fillGradient": 0,
       "gridPos": {
         "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 3
+        "w": 24,
+        "x": 0,
+        "y": 11
       },
       "id": 6,
       "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "hideEmpty": true,
+        "hideZero": true,
+        "max": true,
         "min": false,
+        "rightSide": true,
         "show": true,
+        "sideWidth": 420,
         "total": false,
-        "values": false
+        "values": true
       },
       "lines": true,
       "linewidth": 1,
@@ -625,10 +631,10 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(irate(moleculer_req_total{service=~\"$service\", action=~\"$action\"}[1m])) by (action)",
+          "expr": "sum(irate(moleculer_req_duration_ms_count{service=~\"$service\", action=~\"$action\"}[1m])) by (action)",
           "format": "time_series",
           "intervalFactor": 2,
-          "legendFormat": "{{action}} Calls",
+          "legendFormat": "{{action}} Calls/s",
           "refId": "A",
           "step": 2
         },
@@ -636,7 +642,7 @@
           "expr": "sum(irate(moleculer_req_errors_total{service=~\"$service\", action=~\"$action\"}[1m])) by (action)",
           "format": "time_series",
           "intervalFactor": 2,
-          "legendFormat": "{{action}} Errors",
+          "legendFormat": "{{action}} Errors/s",
           "refId": "B",
           "step": 2
         }
@@ -691,20 +697,25 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 7,
-        "w": 12,
+        "h": 8,
+        "w": 24,
         "x": 0,
-        "y": 11
+        "y": 19
       },
       "id": 7,
       "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "hideEmpty": true,
+        "hideZero": false,
+        "max": true,
         "min": false,
+        "rightSide": true,
         "show": true,
+        "sideWidth": 420,
         "total": false,
-        "values": false
+        "values": true
       },
       "lines": true,
       "linewidth": 1,
@@ -726,7 +737,7 @@
           "expr": "sum(irate(moleculer_req_errors_total{service=~\"$service\", action=~\"$action\"}[1m])) by (action, errorName) ",
           "format": "time_series",
           "intervalFactor": 2,
-          "legendFormat": "{{action}}-{{errorName}}",
+          "legendFormat": "{{action}}/{{errorName}}",
           "refId": "A",
           "step": 2
         }
@@ -785,18 +796,18 @@
         "allValue": ".*",
         "current": {},
         "datasource": "${DS_PROMETHEUS}",
-        "definition": "label_values(moleculer_action_endpoints_total,action)",
+        "definition": "query_result(count(moleculer_service_endpoints_total) by (service) or count(moleculer_req_duration_ms_sum) by (service))",
         "hide": 0,
         "includeAll": true,
         "label": null,
         "multi": true,
         "name": "service",
         "options": [],
-        "query": "label_values(moleculer_action_endpoints_total,action)",
+        "query": "query_result(count(moleculer_service_endpoints_total) by (service) or count(moleculer_req_duration_ms_sum) by (service))",
         "refresh": 1,
-        "regex": "/(.*)\\.[^\\.]*/",
+        "regex": "/service=\"(.*?)\"/",
         "skipUrlSync": false,
-        "sort": 0,
+        "sort": 5,
         "tagValuesQuery": "",
         "tags": [],
         "tagsQuery": "",
@@ -807,18 +818,18 @@
         "allValue": ".*",
         "current": {},
         "datasource": "${DS_PROMETHEUS}",
-        "definition": "label_values(moleculer_action_endpoints_total{action=~'$service\\\\..*'},action)",
+        "definition": "query_result(count(moleculer_action_endpoints_total{action=~\"$service\\\\..*\"}) by (action) or count(moleculer_req_duration_ms_sum{action=~\"$service\\\\..*\"}) by (action))",
         "hide": 0,
         "includeAll": true,
         "label": null,
         "multi": true,
         "name": "action",
         "options": [],
-        "query": "label_values(moleculer_action_endpoints_total{action=~'$service\\\\..*'},action)",
+        "query": "query_result(count(moleculer_action_endpoints_total{action=~\"$service\\\\..*\"}) by (action) or count(moleculer_req_duration_ms_sum{action=~\"$service\\\\..*\"}) by (action))",
         "refresh": 1,
-        "regex": "",
+        "regex": "/action=\"(.*?)\"/",
         "skipUrlSync": false,
-        "sort": 0,
+        "sort": 5,
         "tagValuesQuery": "",
         "tags": [],
         "tagsQuery": "",
@@ -828,7 +839,7 @@
     ]
   },
   "time": {
-    "from": "now-15m",
+    "from": "now-3h",
     "to": "now"
   },
   "timepicker": {
@@ -859,5 +870,5 @@
   "timezone": "",
   "title": "Moleculer Actions",
   "uid": "S74TTktZz",
-  "version": 1
+  "version": 5
 }

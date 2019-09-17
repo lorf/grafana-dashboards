@@ -104,4 +104,7 @@ map {
 @{$obj->{tags}} = grep { $_ ne "kubernetes-app" } @{$obj->{tags} || []};
 push @{$obj->{tags}}, "k8s";
 
+delete $obj->{uid}
+    if exists $obj->{uid};
+
 print $json->encode($obj);

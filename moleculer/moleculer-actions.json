@@ -52,7 +52,7 @@
   "gnetId": null,
   "graphTooltip": 1,
   "id": null,
-  "iteration": 1568700876706,
+  "iteration": 1568702279210,
   "links": [
     {
       "asDropdown": true,
@@ -708,7 +708,7 @@
         "avg": true,
         "current": true,
         "hideEmpty": true,
-        "hideZero": false,
+        "hideZero": true,
         "max": true,
         "min": false,
         "rightSide": true,
@@ -839,7 +839,7 @@
     ]
   },
   "time": {
-    "from": "now-3h",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {
@@ -870,5 +870,5 @@
   "timezone": "",
   "title": "Moleculer Actions",
   "uid": "S74TTktZz",
-  "version": 5
+  "version": 6
 }

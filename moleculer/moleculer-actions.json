@@ -52,7 +52,7 @@
   "gnetId": null,
   "graphTooltip": 1,
   "id": null,
-  "iteration": 1568706949139,
+  "iteration": 1568707220186,
   "links": [
     {
       "asDropdown": true,
@@ -548,7 +548,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Service Action Response time",
+      "title": "Action Response time",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -651,7 +651,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Service Action calls",
+      "title": "Action Calls",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -746,7 +746,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Error types",
+      "title": "Action Errors",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -870,5 +870,5 @@
   "timezone": "",
   "title": "Moleculer Actions",
   "uid": "S74TTktZz",
-  "version": 8
+  "version": 9
 }
